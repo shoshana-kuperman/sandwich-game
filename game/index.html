@@ -184,7 +184,7 @@ function renderEntry(){
       <p class="err" id="err" role="alert"></p>
       <button class="btn" type="submit">יאלה, משחקים</button>
     </form>
-    <footer class="sign"><span>משחק מבית</span><img src="logo.png" alt="שוננA"></footer>
+    <footer class="sign"><img src="logo.png" alt="שוננA"></footer>
     <p class="preview-note">הפרטים נשמרים אצל שוננA בלבד.</p>`;
   document.getElementById('f').addEventListener('submit', e => {
     e.preventDefault();
@@ -272,6 +272,33 @@ function tally(){
   const strong = ORDER.reduce((m,k)=> t[k] > t[m] ? k : m, ORDER[0]);
   return {t, weak, strong, total: S.answers.filter(a=>a.ok).length};
 }
+// draws the share postcard as a PNG, matching the card on screen
+function drawCard(total){
+  return new Promise(async done => {
+    try{
+      await document.fonts.ready;
+      const W = 1080, H = 1350, c = document.createElement('canvas'); c.width = W; c.height = H;
+      const x = c.getContext('2d');
+      const load = src => new Promise(r => { const i = new Image(); i.onload = () => r(i); i.onerror = () => r(null); i.src = src; });
+      const [g, l] = await Promise.all([load('game-logo.png'), load('logo.png')]);
+      x.fillStyle = '#F2F3F5'; x.fillRect(0, 0, W, H);
+      x.save(); x.translate(W/2, H/2); x.rotate(-1.5 * Math.PI / 180);
+      x.shadowColor = 'rgba(38,38,40,.18)'; x.shadowBlur = 40; x.shadowOffsetY = 16;
+      x.fillStyle = '#FFFFFF'; x.fillRect(-440, -590, 880, 1180); x.restore();
+      x.fillStyle = '#EE2C3B'; x.beginPath(); x.arc(160, 150, 20, 0, Math.PI * 2); x.fill();
+      if(g){ const w = 300, h = w * g.height / g.width; x.drawImage(g, W/2 - w/2, 130, w, h); }
+      x.textAlign = 'center'; x.direction = 'rtl'; x.fillStyle = '#262628';
+      x.font = '500 42px Rubik, Arial, sans-serif'; x.fillText('שיחקתי עכשיו במשחק שיווקי מדליק', W/2, 560);
+      x.font = '400 40px Rubik, Arial, sans-serif'; x.fillText('רוצה לנסות לעקוף אותי?', W/2, 625);
+      x.font = '800 64px Rubik, Arial, sans-serif'; x.fillText('הצלחתי:', W/2, 760);
+      x.direction = 'ltr'; x.fillStyle = '#EE2C3B'; x.font = '900 230px Rubik, Arial, sans-serif'; x.fillText(total + '/16', W/2, 980);
+      x.direction = 'rtl'; x.fillStyle = '#262628'; x.font = '900 96px Rubik, Arial, sans-serif'; x.fillText('נראה אותך', W/2, 1140);
+      const tw = x.measureText('נראה אותך').width; x.fillStyle = '#EE2C3B'; x.beginPath(); x.arc(W/2 - tw/2 - 24, 1130, 13, 0, Math.PI * 2); x.fill();
+      if(l){ x.save(); x.translate(150, H/2); x.rotate(-Math.PI/2); const w = 200, h = w * l.height / l.width; x.drawImage(l, -w/2, -h/2, w, h); x.restore(); }
+      c.toBlob(b => done(b), 'image/png');
+    }catch(e){ done(null); }
+  });
+}
 function shareText(total){
   return `שיחקתי עכשיו במשחק שיווקי מדליק והצלחתי ${total}/16. רוצה לנסות לעקוף אותי? נראה אותך 🥪
 ${GAME_URL}?ref=${encodeURIComponent(S.id || '')}`;
@@ -304,13 +331,22 @@ function renderResult(){
         <p class="pc-ask">רוצה לנסות לעקוף אותי?</p>
         <p class="pc-score"><span>הצלחתי:</span><b>${total}/16</b></p>
         <p class="pc-dare">נראה אותך<span class="red">.</span></p>
-        <footer class="pc-credit"><span>משחק מבית</span><img src="logo.png" alt="שוננA"></footer>
+        <footer class="pc-credit"><img src="logo.png" alt="שוננA"></footer>
       </figure>
       <a class="btn" id="share" href="https://wa.me/?text=${encodeURIComponent(shareText(total))}" target="_blank" rel="noopener">שלחי לחברה בוואטסאפ</a>
     </section>
     <button class="again" id="again">לשחק שוב</button>
-    <footer class="sign"><span>משחק מבית</span><img src="logo.png" alt="שוננA"></footer>`;
-  document.getElementById('share').addEventListener('click', () => track('share', {}));
+    <footer class="sign"><img src="logo.png" alt="שוננA"></footer>`;
+  // phones that can share files send the postcard image with the text; others fall back to the WhatsApp text link
+  let cardFile = null;
+  drawCard(total).then(b => { if(b) cardFile = new File([b], 'sandwich-challenge.png', {type:'image/png'}); });
+  document.getElementById('share').addEventListener('click', e => {
+    track('share', {});
+    if(cardFile && navigator.canShare && navigator.canShare({files:[cardFile]})){
+      e.preventDefault();
+      navigator.share({files:[cardFile], text:shareText(total)}).catch(() => {});
+    }
+  });
   document.getElementById('again').addEventListener('click', () => { Object.assign(S,{screen:'play',i:0,answers:[],finished:false}); render(); });
   window.scrollTo({top:0});
 }
