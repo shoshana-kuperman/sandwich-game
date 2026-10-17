@@ -80,7 +80,9 @@ label.field{display:flex;flex-direction:column;gap:4px;font-weight:500;font-size
 .opts{display:flex;flex-direction:column;gap:10px}
 .opt{border:2px solid var(--ink);background:var(--white);color:var(--ink);text-align:right;padding:14px 16px;border-radius:4px;font-size:17px;font-weight:500}
 .opt:hover:not(:disabled){background:var(--paper)}
-.opt.right{background:var(--ink);color:var(--white);border-color:var(--ink)}
+.opt.right{background:var(--white);color:var(--ink);border:3px solid var(--ink);font-weight:800;position:relative;padding-inline-start:46px;opacity:1}
+.opt.right::before{content:"";position:absolute;inset-inline-start:18px;top:50%;width:9px;height:17px;border-right:4px solid var(--red);border-bottom:4px solid var(--red);transform:translateY(-62%) rotate(45deg)}
+.opts.done .opt:not(.right):not(.wrong){opacity:.45}
 .opt.wrong{border-color:var(--red);color:var(--red);text-decoration:line-through}
 .opt:disabled{cursor:default}
 .feedback{display:flex;flex-direction:column;gap:12px;padding:18px;background:var(--white);border-top:4px solid var(--red)}
@@ -240,6 +242,7 @@ function answer(k){
   cancelAnimationFrame(timerRAF);
   const s = slides[S.i], ok = k === s.correct;
   S.answers[S.i] = {k, ok, ing:s.ingredient};
+  app.querySelector('.opts').classList.add('done');
   app.querySelectorAll('.opt').forEach((b,j) => {
     b.disabled = true;
     if(j===s.correct) b.classList.add('right');
