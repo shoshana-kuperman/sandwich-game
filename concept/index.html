@@ -473,8 +473,8 @@ h2{font-size:clamp(30px,4.2vw,52px)}
 </section>
 
 <!-- ============ עדויות ============ -->
-<!-- TODO: להחליף את שלוש העדויות הזמניות בעדויות אמיתיות (טקסט, שם, תחום ותמונה אם יש) -->
-<section class="testimonials">
+<!-- מוסתר עד שיהיו עדויות אמיתיות: למחוק את hidden ולהחליף את הטקסטים -->
+<section class="testimonials" hidden>
   <div class="wrap">
     <div class="sec-head reveal">
       <p class="frame-title">עוד נקודת מבט</p>
@@ -500,9 +500,8 @@ h2{font-size:clamp(30px,4.2vw,52px)}
 <!-- ============ נקודת הפתיחה שלי ============ -->
 <section class="about">
   <div class="wrap about-grid">
-    <!-- TODO: להחליף בתמונה של שושנה: <img src="../assets/img/shoshana.jpg" alt="שושנה קופרמן"> -->
-    <figure class="portrait reveal" aria-label="מקום לתמונה של שושנה">
-      <div class="portrait-ph"><span>כאן תיכנס<br>התמונה שלך</span></div>
+    <figure class="portrait reveal">
+      <img src="shoshana.jpg" alt="שושנה קופרמן" width="720" height="900" loading="lazy">
       <figcaption><span class="brush brush--red">שושנה קופרמן</span></figcaption>
     </figure>
     <div class="about-copy">
@@ -732,7 +731,7 @@ h2{font-size:clamp(30px,4.2vw,52px)}
   // אפשר לשים קישור לתשלום, לטופס, ליומן או לוואטסאפ, למשל:
   // 'https://wa.me/9725XXXXXXXX?text=' + encodeURIComponent('היי שושנה, אשמח לפגישת קונספט')
   // =====================================================
-  const CTA_LINK = '#price';
+  const CTA_LINK = 'https://wa.me/972546494732?text=' + encodeURIComponent('היי שושנה, אשמח לשמוע על פגישת קונספט');
 
   document.querySelectorAll('.js-cta').forEach(a => {
     if (a.getAttribute('href') === '#') a.href = CTA_LINK;
