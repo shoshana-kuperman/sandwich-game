@@ -5,7 +5,7 @@
 <base href="/game/">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta property="og:title" content="למה הסנדוויץ' חזר הביתה?">
-<meta property="og:description" content="16 כריכים. 10 שניות לכל אחד. גלי מה חסר בשיווק שלך.">
+<meta property="og:description" content="12 כריכים. 10 שניות לכל אחד. גלי מה חסר בשיווק שלך.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://shonana.co.il/game/">
 <meta property="og:image" content="https://shonana.co.il/game/og.jpg">
@@ -74,7 +74,7 @@ label.field{display:flex;flex-direction:column;gap:4px;font-weight:500;font-size
 
 /* game */
 .topbar{display:flex;justify-content:space-between;align-items:center;font-weight:700;font-variant-numeric:tabular-nums}
-.box{display:grid;grid-template-columns:repeat(16,1fr);gap:3px}
+.box{display:grid;grid-template-columns:repeat(var(--n,12),1fr);gap:3px}
 .box i{height:8px;border-radius:2px;background:var(--line)}
 .box i.ok{background:var(--red)} .box i.no{background:var(--ink)} .box i.now{background:var(--mute)}
 .photo{position:relative;aspect-ratio:1;max-width:100%;border:6px solid var(--white);box-shadow:0 10px 30px rgba(38,38,40,.18);background:var(--line);overflow:hidden}
@@ -124,9 +124,23 @@ form.row{display:flex;flex-direction:row;gap:8px}
 .row input{flex:1;min-width:0;border:2px solid var(--ink);border-radius:4px;padding:10px 12px;font-size:16px}
 .again{background:none;border:0;color:var(--mute);text-decoration:underline;font-size:15px;align-self:center}
 .wa-note{text-align:center;font-size:18px;padding:14px 16px;background:var(--white);border-block:2px solid var(--red)}
-.dare{display:flex;flex-direction:column;gap:16px;padding-top:8px}
-.dare-title{font-size:26px;font-weight:900;text-align:center}
-.dare-sub{text-align:center;margin-top:-8px}
+.gift{text-align:center;font-size:16px;font-weight:500;padding:8px 12px;border-block:2px solid var(--red)}
+.gift b{font-weight:800}
+/* share block: the one call to action on the result screen, set as a black "negative" panel so it reads as the celebration moment */
+.dare{display:flex;flex-direction:column;gap:16px;background:var(--ink);color:var(--white);padding:24px 18px 26px;margin-inline:-16px;position:relative;overflow:hidden}
+.dare-title{font-size:30px;font-weight:900;text-align:center;line-height:1.1}
+.dare-sub{text-align:center;margin-top:-6px;font-size:17px;font-weight:300}
+.dare .postcard{color:var(--ink)}
+.dare .btn{font-size:21px;padding:18px 20px;animation:nudge 2.4s ease-in-out 1.2s infinite}
+.dare .btn.sent{animation:none}
+@keyframes nudge{0%,80%,100%{transform:scale(1)}88%{transform:scale(1.04)}94%{transform:scale(.99)}}
+.dare-done{text-align:center;font-weight:800;font-size:19px;min-height:0}
+.dare-done:empty{display:none}
+.pc-url{font-size:13px;font-weight:700;color:var(--mute);direction:ltr;letter-spacing:.02em}
+/* confetti in brand colors, fired on the result and again after a share */
+.confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:20}
+.confetti i{position:absolute;top:-16px;width:9px;height:14px;border-radius:2px;animation:fall var(--d,2.6s) cubic-bezier(.2,.6,.4,1) forwards}
+@keyframes fall{to{transform:translate(var(--x,0),110vh) rotate(var(--r,540deg))}}
 .pc-ask{font-size:16px;font-weight:500;margin-top:-6px}
 .pc-credit{position:absolute;left:20px;top:50%;transform:translate(-50%,-50%) rotate(-90deg);display:flex;align-items:center;gap:6px;white-space:nowrap;font-size:11px;color:var(--mute)}
 .pc-credit img{width:62px;display:block}
@@ -140,7 +154,7 @@ form.row{display:flex;flex-direction:row;gap:8px}
 .pc-line{font-size:16px;font-weight:500;line-height:1.4;text-wrap:balance}
 .pc-dare{font-size:30px;font-weight:900;line-height:1.1}
 .pc-logo{width:96px}
-@media (prefers-reduced-motion: reduce){.btn,.timer span{transition:none}}
+@media (prefers-reduced-motion: reduce){.btn,.timer span{transition:none}.dare .btn{animation:none}.confetti{display:none}}
 </style>
 
 </head>
@@ -168,7 +182,7 @@ const PROFILES = {
   promise:   {title:'כריך הפלא', line:'יש בו הכול, ובגלל זה לא ברור מה בדיוק מקבלים.', tip:'נסחי במשפט אחד מה הלקוחה מקבלת ממך. בלי "וגם". אם לא מצליח במשפט אחד, ההבטחה עוד לא חדה.'},
   relevance: {title:'הכריך של מישהו אחר', line:'ההצעה טובה, אבל היא לא מדברת אל האדם הנכון ואל מה שהוא צריך עכשיו.', tip:'כתבי משפט אחד: למי בדיוק השירות שלך, ובאיזה רגע בחיים שלה היא צריכה אותו. כל השאר נבנה מזה.'}
 };
-const CHEERS = {6:'שליש מהתיק כבר מאחורייך. ממשיכות.', 11:'עוד חמישה כריכים, ויש לך תמונה מלאה.'};
+const CHEERS = {4:'שליש מהתיק כבר מאחורייך. ממשיכות.', 8:'עוד ארבעה כריכים, ויש לך תמונה מלאה.'};
 const SECONDS = 10;
 
 let slides = [];
@@ -182,7 +196,8 @@ function renderEntry(){
   app.innerHTML = `
     <img class="game-logo" src="game-logo.png" alt="אמא מוכרת סנדוויצ'ים">
     <h1 class="hero">למה הסנדוויץ'<br>חזר הביתה<span class="red">?</span></h1>
-    <p class="lede"><b>16 כריכים. 10 שניות לכל אחד.</b><br>בסוף תגלי מה חסר בשיווק שלך.</p>
+    <p class="lede"><b>12 כריכים. 10 שניות לכל אחד.</b><br>בסוף תגלי מה חסר בשיווק שלך.</p>
+    <p class="gift">🎁 ובסוף מחכה לך מתנה: <b>המתכון הסודי</b><span class="red">.</span></p>
     <form id="f" novalidate>
       <label class="field">שם פרטי<input id="name" autocomplete="given-name" required placeholder=" " value="${esc(S.name)}"></label>
       <label class="field">טלפון נייד<input id="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder=" " value="${esc(S.phone)}"></label>
@@ -209,13 +224,13 @@ function renderEntry(){
 // ---------- play ----------
 let timerRAF = 0;
 function boxStrip(){
-  return `<div class="box" aria-hidden="true">${slides.map((_,k)=>{
+  return `<div class="box" aria-hidden="true" style="--n:${slides.length}">${slides.map((_,k)=>{
     const a = S.answers[k]; return `<i class="${a ? (a.ok?'ok':'no') : (k===S.i?'now':'')}"></i>`;}).join('')}</div>`;
 }
 function renderPlay(){
   const s = slides[S.i];
   app.innerHTML = `
-    <div class="topbar"><span>כריך ${S.i+1}/16</span><span>${S.answers.filter(a=>a.ok).length} נכונות</span></div>
+    <div class="topbar"><span>כריך ${S.i+1}/${slides.length}</span><span>${S.answers.filter(a=>a.ok).length} נכונות</span></div>
     ${boxStrip()}
     <div class="photo"><img id="ph" src="${s.img}" alt="כריך שחזר הביתה, שלב ${S.i+1}"></div>
     <div class="timer" id="tm" role="progressbar" aria-label="זמן שנותר"><span></span></div>
@@ -297,64 +312,86 @@ function drawCard(total){
       x.font = '500 42px Rubik, Arial, sans-serif'; x.fillText('שיחקתי עכשיו במשחק שיווקי מדליק', W/2, 560);
       x.font = '400 40px Rubik, Arial, sans-serif'; x.fillText('רוצה לנסות לעקוף אותי?', W/2, 625);
       x.font = '800 64px Rubik, Arial, sans-serif'; x.fillText('הצלחתי:', W/2, 760);
-      x.direction = 'ltr'; x.fillStyle = '#EE2C3B'; x.font = '900 230px Rubik, Arial, sans-serif'; x.fillText(total + '/16', W/2, 980);
-      x.direction = 'rtl'; x.fillStyle = '#262628'; x.font = '900 96px Rubik, Arial, sans-serif'; x.fillText('נראה אותך', W/2, 1140);
-      const tw = x.measureText('נראה אותך').width; x.fillStyle = '#EE2C3B'; x.beginPath(); x.arc(W/2 - tw/2 - 24, 1130, 13, 0, Math.PI * 2); x.fill();
+      x.direction = 'ltr'; x.fillStyle = '#EE2C3B'; x.font = '900 230px Rubik, Arial, sans-serif'; x.fillText(total + '/' + slides.length, W/2, 980);
+      x.direction = 'rtl'; x.fillStyle = '#262628'; x.font = '900 96px Rubik, Arial, sans-serif'; x.fillText('נראה אותך', W/2, 1120);
+      const tw = x.measureText('נראה אותך').width; x.fillStyle = '#EE2C3B'; x.beginPath(); x.arc(W/2 - tw/2 - 24, 1110, 13, 0, Math.PI * 2); x.fill();
+      // the address is printed on the card too, in case the share drops the link text
+      x.direction = 'ltr'; x.fillStyle = '#68686F'; x.font = '700 36px Rubik, Arial, sans-serif'; x.fillText('shonana.co.il/game', W/2, 1210);
       if(l){ x.save(); x.translate(150, H/2); x.rotate(-Math.PI/2); const w = 200, h = w * l.height / l.width; x.drawImage(l, -w/2, -h/2, w, h); x.restore(); }
       c.toBlob(b => done(b), 'image/png');
     }catch(e){ done(null); }
   });
 }
 function shareText(total){
-  return `שיחקתי עכשיו במשחק שיווקי מדליק והצלחתי ${total}/16. רוצה לנסות לעקוף אותי? נראה אותך 🥪
+  return `שיחקתי עכשיו במשחק שיווקי מדליק והצלחתי ${total}/${slides.length}. רוצה לנסות לעקוף אותי? נראה אותך 🥪
 ${GAME_URL}?ref=${encodeURIComponent(S.id || '')}`;
 }
 function renderResult(){
   const {t, weak, strong, total} = tally(), P = PROFILES[weak];
-  if(!S.finished){ S.finished = true; track('finish', {total, t, profile:P.title}); }
+  const N = slides.length, per = k => slides.filter(s => s.ingredient === k).length;
+  if(!S.finished){ S.finished = true; track('finish', {total, of:N, t, profile:P.title}); }
   app.innerHTML = `
     <header class="res-head">
       <img class="game-logo small" src="game-logo.png" alt="אמא מוכרת סנדוויצ'ים">
       <p class="res-for">${esc(S.name)}, יצא לך:</p>
       <h1 class="res-title">${P.title}</h1>
-      <p class="score">ענית נכון על <b>${total}</b> מתוך 16 כריכים</p>
+      <p class="score">ענית נכון על <b>${total}</b> מתוך ${N} כריכים</p>
       <p class="res-line">${P.line}</p>
     </header>
     <div class="meters" aria-label="ציון לפי עיקרון">
       ${ORDER.map(k=>`<div class="meter"><span class="lab">${NAMES[k]}</span>
-        <span class="dots" aria-label="${t[k]} מתוך 4">${[0,1,2,3].map(d=>`<i class="${d<t[k]?'on':''}"></i>`).join('')}</span>
+        <span class="dots" aria-label="${t[k]} מתוך ${per(k)}">${Array.from({length:per(k)},(_,d)=>`<i class="${d<t[k]?'on':''}"></i>`).join('')}</span>
         ${k===weak?'<span class="tag weak">כדאי לחזק</span>':k===strong?'<span class="tag strong">הכי חזק</span>':'<span></span>'}</div>`).join('')}
     </div>
     <div class="tip"><h3>המשימה שלך להיום</h3><p>${P.tip}</p></div>
-    <p class="wa-note">הסיכום המלא ומדריך קצר יגיעו אלייך בקרוב <b>בוואטסאפ</b><span class="red">.</span></p>
+    <p class="wa-note">🎁 המתכון הסודי מחכה לך <b>בוואטסאפ</b><span class="red">.</span></p>
     <section class="dare" aria-label="אתגרי חברה">
-      <h2 class="dare-title">עם מי את רוצה להתחרות<span class="red">?</span></h2>
-      <p class="dare-sub">שלחי את הגלויה לחברה, ונראה אם היא מצליחה לעקוף אותך.</p>
+      <h2 class="dare-title">מי מהחברות תעקוף אותך<span class="red">?</span></h2>
+      <p class="dare-sub">שלחי את הגלויה לחברה ותגלי מי מבינה בשיווק יותר.</p>
       <figure class="postcard" aria-label="גלויה לשיתוף">
         <span class="stamp" aria-hidden="true"></span>
         <img class="pc-game" src="game-logo.png" alt="">
         <p class="pc-line">שיחקתי עכשיו במשחק שיווקי מדליק</p>
         <p class="pc-ask">רוצה לנסות לעקוף אותי?</p>
-        <p class="pc-score"><span>הצלחתי:</span><b>${total}/16</b></p>
+        <p class="pc-score"><span>הצלחתי:</span><b>${total}/${N}</b></p>
         <p class="pc-dare">נראה אותך<span class="red">.</span></p>
+        <p class="pc-url">shonana.co.il/game</p>
         <footer class="pc-credit"><img src="logo.png" alt="שוננA"></footer>
       </figure>
-      <a class="btn" id="share" href="https://wa.me/?text=${encodeURIComponent(shareText(total))}" target="_blank" rel="noopener">שלחי לחברה בוואטסאפ</a>
+      <a class="btn" id="share" href="https://wa.me/?text=${encodeURIComponent(shareText(total))}" target="_blank" rel="noopener">🥪 שלחי אתגר לחברה</a>
+      <p class="dare-done" id="done" role="status"></p>
     </section>
     <button class="again" id="again">לשחק שוב</button>
     <footer class="sign"><img src="logo.png" alt="שוננA"></footer>`;
   // phones that can share files send the postcard image with the text; others fall back to the WhatsApp text link
   let cardFile = null;
   drawCard(total).then(b => { if(b) cardFile = new File([b], 'sandwich-challenge.png', {type:'image/png'}); });
-  document.getElementById('share').addEventListener('click', e => {
+  const shareBtn = document.getElementById('share');
+  // after a share: a second burst of confetti and the button invites another friend
+  const celebrate = () => {
+    confetti();
+    document.getElementById('done').textContent = 'יצא! 🎉 עכשיו נראה אם היא עוקפת אותך.';
+    shareBtn.textContent = 'לאתגר עוד חברה';
+    shareBtn.classList.add('sent');
+  };
+  shareBtn.addEventListener('click', e => {
     track('share', {});
     if(cardFile && navigator.canShare && navigator.canShare({files:[cardFile]})){
       e.preventDefault();
-      navigator.share({files:[cardFile], text:shareText(total)}).catch(() => {});
-    }
+      navigator.share({files:[cardFile], text:shareText(total)}).then(celebrate).catch(() => {});
+    } else setTimeout(celebrate, 600);
   });
+  confetti();
   document.getElementById('again').addEventListener('click', () => { Object.assign(S,{screen:'play',i:0,answers:[],finished:false}); render(); });
   window.scrollTo({top:0});
+}
+
+function confetti(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const box = document.createElement('div'); box.className = 'confetti'; box.setAttribute('aria-hidden', 'true');
+  box.innerHTML = Array.from({length:46}, (_, k) => `<i style="left:${Math.random()*100}%;background:${k % 3 ? '#EE2C3B' : '#262628'};--x:${(Math.random()-.5)*160}px;--r:${360 + Math.random()*540}deg;--d:${2 + Math.random()*1.4}s;animation-delay:${Math.random()*.4}s"></i>`).join('');
+  document.body.appendChild(box);
+  setTimeout(() => box.remove(), 4200);
 }
 
 function render(){ ({entry:renderEntry, play:renderPlay, result:renderResult})[S.screen](); }
