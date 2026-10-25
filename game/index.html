@@ -124,7 +124,7 @@ form.row{display:flex;flex-direction:row;gap:8px}
 .row input{flex:1;min-width:0;border:2px solid var(--ink);border-radius:4px;padding:10px 12px;font-size:16px}
 .again{background:none;border:0;color:var(--mute);text-decoration:underline;font-size:15px;align-self:center}
 .wa-note{text-align:center;font-size:18px;padding:14px 16px;background:var(--white);border-block:2px solid var(--red)}
-.gift{text-align:center;font-size:16px;font-weight:500;padding:8px 12px;border-block:2px solid var(--red)}
+.gift{text-align:center;font-size:16px;font-weight:500;padding:8px 12px;border-block:2px solid var(--red);text-wrap:balance}
 .gift b{font-weight:800}
 /* share block: the one call to action on the result screen, set as a black "negative" panel so it reads as the celebration moment */
 .dare{display:flex;flex-direction:column;gap:16px;background:var(--ink);color:var(--white);padding:24px 18px 26px;margin-inline:-16px;position:relative;overflow:hidden}
@@ -196,8 +196,8 @@ function renderEntry(){
   app.innerHTML = `
     <img class="game-logo" src="game-logo.png" alt="אמא מוכרת סנדוויצ'ים">
     <h1 class="hero">למה הסנדוויץ'<br>חזר הביתה<span class="red">?</span></h1>
-    <p class="lede"><b>12 כריכים. 10 שניות לכל אחד.</b><br>בסוף תגלי מה חסר בשיווק שלך.</p>
-    <p class="gift">🎁 ומחכה לך מתנה: <b>המתכון הסודי</b><span class="red">.</span></p>
+    <p class="lede"><b>12 כריכים. 10 שניות לכל אחד.</b><br>תגלי מה יגרום ללקוחות לבחור בך!</p>
+    <p class="gift">🎁 <b>מתנה! המתכון לסנדוויץ' השיווקי שלך</b></p>
     <form id="f" novalidate>
       <label class="field">שם פרטי<input id="name" autocomplete="given-name" required placeholder=" " value="${esc(S.name)}"></label>
       <label class="field">טלפון נייד<input id="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder=" " value="${esc(S.phone)}"></label>
