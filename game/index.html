@@ -101,7 +101,7 @@ label.field{display:flex;flex-direction:column;gap:4px;font-weight:500;font-size
 .res-name{padding:30px 30px 62px;text-align:center}
 .res-name small{display:block;font-size:16px;font-weight:400;opacity:.85}
 .res-name strong{display:block;font-size:clamp(28px,8vw,38px);font-weight:900;line-height:1.1}
-.score{font-size:18px;text-align:center}
+.score{font-size:20px;font-weight:500;text-align:center;line-height:1.4}
 .score b{font-size:28px;font-weight:900;font-variant-numeric:tabular-nums}
 .meters{display:flex;flex-direction:column;gap:10px;background:var(--white);padding:16px}
 .meter{display:grid;grid-template-columns:76px 1fr auto;gap:12px;align-items:center}
@@ -197,7 +197,7 @@ function renderEntry(){
     <img class="game-logo" src="game-logo.png" alt="אמא מוכרת סנדוויצ'ים">
     <h1 class="hero">למה הסנדוויץ'<br>חזר הביתה<span class="red">?</span></h1>
     <p class="lede"><b>12 כריכים. 10 שניות לכל אחד.</b><br>בסוף תגלי מה חסר בשיווק שלך.</p>
-    <p class="gift">🎁 ובסוף מחכה לך מתנה: <b>המתכון הסודי</b><span class="red">.</span></p>
+    <p class="gift">🎁 ומחכה לך מתנה: <b>המתכון הסודי</b><span class="red">.</span></p>
     <form id="f" novalidate>
       <label class="field">שם פרטי<input id="name" autocomplete="given-name" required placeholder=" " value="${esc(S.name)}"></label>
       <label class="field">טלפון נייד<input id="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder=" " value="${esc(S.phone)}"></label>
@@ -333,9 +333,7 @@ function renderResult(){
   app.innerHTML = `
     <header class="res-head">
       <img class="game-logo small" src="game-logo.png" alt="אמא מוכרת סנדוויצ'ים">
-      <p class="res-for">${esc(S.name)}, יצא לך:</p>
-      <h1 class="res-title">${P.title}</h1>
-      <p class="score">ענית נכון על <b>${total}</b> מתוך ${N} כריכים</p>
+      <h1 class="score">${esc(S.name)}, ענית נכון על <b>${total}</b> מתוך ${N} כריכים</h1>
       <p class="res-line">${P.line}</p>
     </header>
     <div class="meters" aria-label="ציון לפי עיקרון">
