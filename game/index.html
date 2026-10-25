@@ -62,6 +62,7 @@ button{cursor:pointer}
 form{display:flex;flex-direction:column;gap:14px}
 label.field{display:flex;flex-direction:column;gap:4px;font-weight:500;font-size:15px}
 .field input{border:2px solid var(--ink);background:var(--white);border-radius:4px;padding:12px 14px;font-size:18px;color:var(--ink)}
+.field .hint{font-weight:300;font-size:13px;color:var(--mute)}
 .field input:invalid:not(:placeholder-shown){border-color:var(--red)}
 .consent{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--mute)}
 .consent input{width:20px;height:20px;accent-color:var(--red);margin-top:2px;flex:none}
@@ -185,7 +186,7 @@ function renderEntry(){
     <p class="lede"><b>16 כריכים. 10 שניות לכל אחד.</b><br>בסוף תגלי מה חסר בשיווק שלך.</p>
     <form id="f" novalidate>
       <label class="field">שם פרטי<input id="name" autocomplete="given-name" required placeholder=" " value="${esc(S.name)}"></label>
-      <label class="field">טלפון נייד<input id="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder=" " value="${esc(S.phone)}"></label>
+      <label class="field">טלפון נייד<input id="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder=" " value="${esc(S.phone)}"><span class="hint">לכאן יגיעו בוואטסאפ התוצאה המלאה ומתנה קטנה<span class="red">.</span></span></label>
       <label class="consent"><input id="consent" type="checkbox" ${S.consent?'checked':''}>מאשרת לקבל משוננA תוכן, טיפים והצעות בוואטסאפ. אפשר להסיר בכל רגע.</label>
       <p class="err" id="err" role="alert"></p>
       <button class="btn" type="submit">יאלה, משחקים</button>
