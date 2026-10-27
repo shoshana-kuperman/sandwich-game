@@ -394,7 +394,15 @@ function confetti(){
 
 function render(){ ({entry:renderEntry, play:renderPlay, result:renderResult})[S.screen](); }
 
+// logs every page load to the visits tab; the stable id per browser gives unique visitors
+function trackVisit(){
+  let vid;
+  try{ vid = localStorage.getItem('sandwich-visitor'); if(!vid){ vid = newId(); localStorage.setItem('sandwich-visitor', vid); } }catch(e){ vid = newId(); }
+  track('visit', {id:vid, src:PARAMS.get('src') || (PARAMS.get('ref') ? 'חברה' : 'ישיר'), ref:PARAMS.get('ref') || ''});
+}
+
 async function start(saved){
+  if(!saved) trackVisit();
   try{ slides = await (await fetch('slides.json')).json(); }
   catch(e){ app.innerHTML = '<p class="lede">המשחק לא נטען. רענני את הדף ונסי שוב.</p>'; return; }
   if(saved && saved.screen) S = saved;
