@@ -315,7 +315,7 @@ function renderResult(){
         <button class="btn" type="submit">💬 שמרי אותי וקבלי את המתכון</button>
       </form>
       <p class="dare-note">הפרטים נשמרים אצל שוננA בלבד.</p>`;
-    document.getElementById('f').addEventListener('submit', async e => {
+    document.getElementById('f').addEventListener('submit', e => {
       e.preventDefault();
       const name = document.getElementById('name').value.trim();
       const phone = document.getElementById('phone').value.replace(/[\s-]/g,'');
@@ -325,9 +325,10 @@ function renderResult(){
       const btn = document.querySelector('#f .btn'); btn.disabled = true; btn.textContent = 'רגע...';
       Object.assign(S, {name, phone, consent:document.getElementById('consent').checked, signed:true});
       store('sandwich-player', {name, phone});
-      // signup must land before finish, or finish would be overwritten by signup's defaults
-      await track('signup', {name, phone, consent:S.consent, src:SOURCE.src, ref:SOURCE.ref});
-      sendFinish(); track('save', {});
+      // one request carries the signup and the result (the sheet can be slow to answer, so nothing waits on it);
+      // keepalive lets it finish even as the page hands over to WhatsApp
+      S.finished = true;
+      track('signup', {name, phone, consent:S.consent, src:SOURCE.src, ref:SOURCE.ref, total, of:N, t, profile:P.title});
       // straight into a chat with Shoshana, where WhatsApp offers to add her to contacts
       location.href = `https://wa.me/${BUSINESS_PHONE}?text=${encodeURIComponent(SAVE_TEXT)}`;
       showSave();
