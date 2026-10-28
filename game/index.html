@@ -46,7 +46,7 @@ button{cursor:pointer}
 
 /* entry */
 .game-logo{display:block;width:170px;margin-inline:auto}
-.game-logo.small{width:84px}
+.game-logo.small{width:64px}
 .res-head{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
 .res-head .game-logo{margin-bottom:6px}
 .res-for{font-size:16px;color:var(--mute)}
@@ -123,37 +123,27 @@ label.field{display:flex;flex-direction:column;gap:4px;font-weight:500;font-size
 form.row{display:flex;flex-direction:row;gap:8px}
 .row input{flex:1;min-width:0;border:2px solid var(--ink);border-radius:4px;padding:10px 12px;font-size:16px}
 .again{background:none;border:0;color:var(--mute);text-decoration:underline;font-size:15px;align-self:center}
-.wa-note{text-align:center;font-size:18px;padding:14px 16px;background:var(--white);border-block:2px solid var(--red)}
 .gift{text-align:center;font-size:16px;font-weight:500;padding:8px 12px;border-block:2px solid var(--red);text-wrap:balance}
 .gift b{font-weight:800}
 /* share block: the one call to action on the result screen, set as a black "negative" panel so it reads as the celebration moment */
 .dare{display:flex;flex-direction:column;gap:16px;background:var(--ink);color:var(--white);padding:24px 18px 26px;margin-inline:-16px;position:relative;overflow:hidden}
-.dare-title{font-size:30px;font-weight:900;text-align:center;line-height:1.1}
+.dare-title{font-size:26px;font-weight:900;text-align:center;line-height:1.1}
 .dare-sub{text-align:center;margin-top:-6px;font-size:17px;font-weight:300}
-.dare .postcard{color:var(--ink)}
 .dare .btn{font-size:21px;padding:18px 20px;animation:nudge 2.4s ease-in-out 1.2s infinite}
 .dare .btn.sent{animation:none}
 @keyframes nudge{0%,80%,100%{transform:scale(1)}88%{transform:scale(1.04)}94%{transform:scale(.99)}}
+.chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:-6px}
+.chips .tag{font-size:14px;padding:4px 12px}
+.dare .field{color:var(--white)}
+.dare .consent{color:#c9c9cf}
+.dare .err{color:#ff8a94}
+.dare-note{text-align:center;font-size:13px;color:#c9c9cf;margin-top:-6px}
 .dare-done{text-align:center;font-weight:800;font-size:19px;min-height:0}
 .dare-done:empty{display:none}
-.pc-url{font-size:13px;font-weight:700;color:var(--mute);direction:ltr;letter-spacing:.02em}
 /* confetti in brand colors, fired on the result and again after a share */
 .confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:20}
 .confetti i{position:absolute;top:-16px;width:9px;height:14px;border-radius:2px;animation:fall var(--d,2.6s) cubic-bezier(.2,.6,.4,1) forwards}
 @keyframes fall{to{transform:translate(var(--x,0),110vh) rotate(var(--r,540deg))}}
-.pc-ask{font-size:16px;font-weight:500;margin-top:-6px}
-.pc-credit{position:absolute;left:20px;top:50%;transform:translate(-50%,-50%) rotate(-90deg);display:flex;align-items:center;gap:6px;white-space:nowrap;font-size:11px;color:var(--mute)}
-.pc-credit img{width:62px;display:block}
-.postcard{position:relative;margin:0 auto;width:min(100%,360px);background:var(--white);padding:22px 40px 22px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;transform:rotate(-1.5deg);box-shadow:0 12px 28px rgba(38,38,40,.18);border:1px solid var(--line)}
-.stamp{position:absolute;top:14px;left:14px;width:18px;height:18px;border-radius:50%;background:var(--red)}
-.pc-eyebrow{font-size:13px;font-weight:700;letter-spacing:.06em;color:var(--mute)}
-.pc-game{width:92px}
-.pc-score{display:flex;flex-direction:column;align-items:center;gap:2px;margin-block:4px}
-.pc-score span{font-size:22px;font-weight:800;line-height:1.2}
-.pc-score b{font-size:54px;line-height:1;font-weight:900;color:var(--red);font-variant-numeric:tabular-nums}
-.pc-line{font-size:16px;font-weight:500;line-height:1.4;text-wrap:balance}
-.pc-dare{font-size:30px;font-weight:900;line-height:1.1}
-.pc-logo{width:96px}
 @media (prefers-reduced-motion: reduce){.btn,.timer span{transition:none}.dare .btn{animation:none}.confetti{display:none}}
 </style>
 
@@ -164,14 +154,21 @@ form.row{display:flex;flex-direction:row;gap:8px}
 <script>
 const BRUSH = "M785.41,339.04c-.89-3.74-.58-8-.48-12.01.23-8.81-2.46-16.71-5.08-24.51-2.24-6.69-5.98-8.1-12.17-5.94-5.89-1.31-6.28-1.66-6.38-6.53-.05-2.25.31-4.54.13-6.76-.58-6.92,2.19-13.28,2.12-20.04-.14-14.86-.11-29.76-2.44-44.44-1.14-7.18-4.14-12.1-10.05-14.48-10-4.04-10.96-5.87-11.53-19.03-.18-4.05.09-8.12.02-12.18-.06-3.61.17-7.35-.54-10.78-2.33-11.31-6.39-14.9-13.46-14.08-2.53.29-5.1-.06-7.65-.07-70.04,0-139.97.69-210,3.37-26.6,1.02-53.2,2.22-79.79,3.6-22.57,1.17-46.7-1.54-68.77,3.41-1.77.4-3.62.27-5.43.27-8.37,0-16.75.12-25.12-.07-10.93-.24-21.65,2.81-32.64,2.32-12.36-.55-24.77.1-37.15.46-3.56.1-7.35-.73-10.58,2.17,1.81.12,3.29.79,4.51,1.92-1.22-1.13-2.7-1.8-4.51-1.92-3.62.26-7.26.28-10.84.85-2.15.34-4.16.97-6.42.51-10.12-2.07-20.27-1.28-30.4.14-8.99,1.27-17.95,2.99-26.96,3.89-10.13,1.02-20.36.02-30.4,2.85-2.08.59-4.36.4-6.52.19-7.23-.68-14.54.34-21.71-1.97-4.41-1.42-8.37,4.03-7.55,9.88,1.36,9.75,2.07,19.59,4.66,29.08,1.97,7.23,3.49,14.73,2.96,22.55-11.96,1.1-23.93,2.18-35.89,3.33-1.07.1-2.14.5-3.17.92-3.05,1.26-4.94,3.76-5.04,7.88-.17,7.65-.59,15.41,2.94,22.27,1.42,2.75,1.78,5.84,2.54,8.84,1.85,7.3,4.02,14.47,5.99,21.73.78,2.87,2.36,4.49,4.66,5.01,1.42.32,2.9.3,4.35.4,15.3.99,13.16,5.24,16.05,16.81,1.6,6.4.65,7.86-5.33,7.54-8.41-.45-16.66.09-24.86,2.64-5.23,1.63-6.13,2.48-6.28,8.65-.14,5.85,3.93,28.4,6.83,37.83.78,7.16,4.89,7.97,9.62,7.98,37.71,0,73.93.44,111.57-3.14,82.9-7.87,165.89-14.96,249.02-17.79,80.59-2.74,160.6,1.95,241.06,5.35,7.98.34,16.02,1.21,23.87,2.97,7.24,1.62,14.43,2.13,21.71,1.98,1.33,1.61,2.99,2.15,4.78,2.18,4.97.08,9.94.14,14.9.21,1.46.15,2.92.3,4.38.45,2.56,2.47,5.29,4.7,7.63,7.46,4.53,5.35,12.21,3.75,15.86-3.51,1.55-3.08,2.5-6.41,2.7-10.09.55-10.18,2.72-20.25.26-30.57Z";
 const BUSINESS_PHONE = '972546494732';
+const SAVE_TEXT = "היי שושנה! 🥪 סיימתי את משחק הסנדוויצ'ים ושמרתי אותך 💛 אשמח למתכון הסודי!";
 const SHEET_URL = 'https://script.google.com/macros/s/AKfycbzZmspM0bM1NcnLO7O_gJ_AKLFx2cz98wRpt0p2Zk5SQ1xpSzpGvhm8L7OZPHmt4953/exec';
 const GAME_URL = location.origin + location.pathname;
 const PARAMS = new URLSearchParams(location.search);
 const newId = () => Date.now().toString(36).slice(-4) + Math.random().toString(36).slice(2, 6);
 // sends one event to the Google Sheet; failures never interrupt the game
 function track(event, data){
-  try{ fetch(SHEET_URL, {method:'POST', mode:'no-cors', keepalive:true, headers:{'Content-Type':'text/plain;charset=utf-8'}, body:JSON.stringify({id:S.id, event, ...data})}).catch(()=>{}); }catch(e){}
+  try{ return fetch(SHEET_URL, {method:'POST', mode:'no-cors', keepalive:true, headers:{'Content-Type':'text/plain;charset=utf-8'}, body:JSON.stringify({id:S.id, event, ...data})}).catch(()=>{}); }catch(e){ return Promise.resolve(); }
 }
+// where the player came from: kept from the landing URL (and remembered for a later visit) until she signs up at the end
+const SOURCE = (() => {
+  const src = PARAMS.get('src'), ref = PARAMS.get('ref');
+  if(src || ref){ const s = {src: src || (ref ? 'חברה' : 'ישיר'), ref: ref || ''}; try{ localStorage.setItem('sandwich-source', JSON.stringify(s)); }catch(e){} return s; }
+  try{ return JSON.parse(localStorage.getItem('sandwich-source') || 'null') || {src:'ישיר', ref:''}; }catch(e){ return {src:'ישיר', ref:''}; }
+})();
 const brush = () => `<svg viewBox="25 150 770 300" preserveAspectRatio="none" aria-hidden="true"><path d="${BRUSH}"/></svg>`;
 
 const NAMES = {relevance:'התאמה', promise:'הבטחה', presence:'נוכחות', attraction:'משיכה'};
@@ -198,25 +195,11 @@ function renderEntry(){
     <h1 class="hero">למה הסנדוויץ'<br>חזר הביתה<span class="red">?</span></h1>
     <p class="lede"><b>12 כריכים. 10 שניות לכל אחד.</b><br>תגלי מה יגרום ללקוחות לבחור בך!</p>
     <p class="gift">🎁 <b>מתנה! המתכון לסנדוויץ' השיווקי שלך</b></p>
-    <form id="f" novalidate>
-      <label class="field">שם פרטי<input id="name" autocomplete="given-name" required placeholder=" " value="${esc(S.name)}"></label>
-      <label class="field">טלפון נייד<input id="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder=" " value="${esc(S.phone)}"></label>
-      <label class="consent"><input id="consent" type="checkbox" ${S.consent?'checked':''}>מאשרת לקבל משוננA תוכן, טיפים והצעות בוואטסאפ. אפשר להסיר בכל רגע.</label>
-      <p class="err" id="err" role="alert"></p>
-      <button class="btn" type="submit">יאלה, משחקים</button>
-    </form>
-    <footer class="sign"><img src="logo.png" alt="שוננA"></footer>
-    <p class="preview-note">הפרטים נשמרים אצל שוננA בלבד.</p>`;
-  document.getElementById('f').addEventListener('submit', e => {
-    e.preventDefault();
-    const name = document.getElementById('name').value.trim();
-    const phone = document.getElementById('phone').value.replace(/[\s-]/g,'');
-    const err = document.getElementById('err');
-    if(!name){ err.textContent = 'איך לקרוא לך? כתבי שם פרטי.'; return; }
-    if(!/^0?5\d{8}$/.test(phone)){ err.textContent = 'מספר הטלפון צריך להיות נייד ישראלי, למשל 050-1234567.'; return; }
-    Object.assign(S, {id:newId(), name, phone, consent:document.getElementById('consent').checked, screen:'play', i:0, answers:[], finished:false});
-    track('signup', {name, phone, consent:S.consent, src:PARAMS.get('src') || (PARAMS.get('ref') ? 'חברה' : 'ישיר'), ref:PARAMS.get('ref') || ''});
-    store('sandwich-player', {name, phone});
+    <button class="btn" id="go">יאלה, משחקים</button>
+    <footer class="sign"><img src="logo.png" alt="שוננA"></footer>`;
+  // no details up front: she plays first and nothing reaches the sheet until she signs up after the last sandwich
+  document.getElementById('go').addEventListener('click', () => {
+    Object.assign(S, {id:newId(), signed:false, screen:'play', i:0, answers:[], finished:false});
     render();
   });
 }
@@ -270,7 +253,6 @@ function answer(k){
     else if(j===k) b.classList.add('wrong');
   });
   const last = S.i === slides.length-1, n = S.i+1;
-  if(!last) track('progress', {reached:n});
   document.getElementById('fb').innerHTML = `
     <div class="feedback">
       <p class="verdict">${k<0 ? 'נגמר הזמן!' : ok ? 'נכון!' : 'לא בדיוק...'}</p>
@@ -281,7 +263,7 @@ function answer(k){
     </div>`;
   app.querySelector('.box').outerHTML = boxStrip();
   const nb = document.getElementById('next');
-  nb.addEventListener('click', () => { if(last){ S.screen='result'; } else { S.i++; } render(); }, {once:true});
+  nb.addEventListener('click', () => { if(last){ S.screen = 'result'; } else { S.i++; } render(); }, {once:true});
   nb.scrollIntoView({behavior:'smooth', block:'center'});
 }
 
@@ -293,92 +275,65 @@ function tally(){
   const strong = ORDER.reduce((m,k)=> t[k] > t[m] ? k : m, ORDER[0]);
   return {t, weak, strong, total: S.answers.filter(a=>a.ok).length};
 }
-// draws the share postcard as a PNG, matching the card on screen
-function drawCard(total){
-  return new Promise(async done => {
-    try{
-      await document.fonts.ready;
-      const W = 1080, H = 1350, c = document.createElement('canvas'); c.width = W; c.height = H;
-      const x = c.getContext('2d');
-      const load = src => new Promise(r => { const i = new Image(); i.onload = () => r(i); i.onerror = () => r(null); i.src = src; });
-      const [g, l] = await Promise.all([load('game-logo.png'), load('logo.png')]);
-      x.fillStyle = '#F2F3F5'; x.fillRect(0, 0, W, H);
-      x.save(); x.translate(W/2, H/2); x.rotate(-1.5 * Math.PI / 180);
-      x.shadowColor = 'rgba(38,38,40,.18)'; x.shadowBlur = 40; x.shadowOffsetY = 16;
-      x.fillStyle = '#FFFFFF'; x.fillRect(-440, -590, 880, 1180); x.restore();
-      x.fillStyle = '#EE2C3B'; x.beginPath(); x.arc(160, 150, 20, 0, Math.PI * 2); x.fill();
-      if(g){ const w = 300, h = w * g.height / g.width; x.drawImage(g, W/2 - w/2, 130, w, h); }
-      x.textAlign = 'center'; x.direction = 'rtl'; x.fillStyle = '#262628';
-      x.font = '500 42px Rubik, Arial, sans-serif'; x.fillText('שיחקתי עכשיו במשחק שיווקי מדליק', W/2, 560);
-      x.font = '400 40px Rubik, Arial, sans-serif'; x.fillText('רוצה לנסות לעקוף אותי?', W/2, 625);
-      x.font = '800 64px Rubik, Arial, sans-serif'; x.fillText('הצלחתי:', W/2, 760);
-      x.direction = 'ltr'; x.fillStyle = '#EE2C3B'; x.font = '900 230px Rubik, Arial, sans-serif'; x.fillText(total + '/' + slides.length, W/2, 980);
-      x.direction = 'rtl'; x.fillStyle = '#262628'; x.font = '900 96px Rubik, Arial, sans-serif'; x.fillText('נראה אותך', W/2, 1120);
-      const tw = x.measureText('נראה אותך').width; x.fillStyle = '#EE2C3B'; x.beginPath(); x.arc(W/2 - tw/2 - 24, 1110, 13, 0, Math.PI * 2); x.fill();
-      // the address is printed on the card too, in case the share drops the link text
-      x.direction = 'ltr'; x.fillStyle = '#68686F'; x.font = '700 36px Rubik, Arial, sans-serif'; x.fillText('shonana.co.il/game', W/2, 1210);
-      if(l){ x.save(); x.translate(150, H/2); x.rotate(-Math.PI/2); const w = 200, h = w * l.height / l.width; x.drawImage(l, -w/2, -h/2, w, h); x.restore(); }
-      c.toBlob(b => done(b), 'image/png');
-    }catch(e){ done(null); }
-  });
-}
-function shareText(total){
-  return `שיחקתי עכשיו במשחק שיווקי מדליק והצלחתי ${total}/${slides.length}. רוצה לנסות לעקוף אותי? נראה אותך 🥪
-${GAME_URL}?ref=${encodeURIComponent(S.id || '')}`;
-}
 function renderResult(){
   const {t, weak, strong, total} = tally(), P = PROFILES[weak];
   const N = slides.length, per = k => slides.filter(s => s.ingredient === k).length;
-  if(!S.finished){ S.finished = true; track('finish', {total, of:N, t, profile:P.title}); }
+  const sendFinish = () => { if(!S.finished){ S.finished = true; track('finish', {total, of:N, t, profile:P.title}); } };
+  if(S.signed) sendFinish();
   app.innerHTML = `
     <header class="res-head">
       <img class="game-logo small" src="game-logo.png" alt="אמא מוכרת סנדוויצ'ים">
-      <h1 class="score">${esc(S.name)}, ענית נכון על <b>${total}</b> מתוך ${N} כריכים</h1>
+      <h1 class="score">${S.signed ? esc(S.name) + ', ' : ''}ענית נכון על <b>${total}</b> מתוך ${N} כריכים</h1>
       <p class="res-line">${P.line}</p>
     </header>
-    <div class="meters" aria-label="ציון לפי עיקרון">
-      ${ORDER.map(k=>`<div class="meter"><span class="lab">${NAMES[k]}</span>
-        <span class="dots" aria-label="${t[k]} מתוך ${per(k)}">${Array.from({length:per(k)},(_,d)=>`<i class="${d<t[k]?'on':''}"></i>`).join('')}</span>
-        ${k===weak?'<span class="tag weak">כדאי לחזק</span>':k===strong?'<span class="tag strong">הכי חזק</span>':'<span></span>'}</div>`).join('')}
-    </div>
-    <div class="tip"><h3>המשימה שלך להיום</h3><p>${P.tip}</p></div>
-    <p class="wa-note">🎁 המתכון הסודי מחכה לך <b>בוואטסאפ</b><span class="red">.</span></p>
-    <section class="dare" aria-label="אתגרי חברה">
-      <h2 class="dare-title">מי מהחברות תעקוף אותך<span class="red">?</span></h2>
-      <p class="dare-sub">שלחי את הגלויה לחברה ותגלי מי מבינה בשיווק יותר.</p>
-      <figure class="postcard" aria-label="גלויה לשיתוף">
-        <span class="stamp" aria-hidden="true"></span>
-        <img class="pc-game" src="game-logo.png" alt="">
-        <p class="pc-line">שיחקתי עכשיו במשחק שיווקי מדליק</p>
-        <p class="pc-ask">רוצה לנסות לעקוף אותי?</p>
-        <p class="pc-score"><span>הצלחתי:</span><b>${total}/${N}</b></p>
-        <p class="pc-dare">נראה אותך<span class="red">.</span></p>
-        <p class="pc-url">shonana.co.il/game</p>
-        <footer class="pc-credit"><img src="logo.png" alt="שוננA"></footer>
-      </figure>
-      <a class="btn" id="share" href="https://wa.me/?text=${encodeURIComponent(shareText(total))}" target="_blank" rel="noopener">🥪 שלחי אתגר לחברה</a>
-      <p class="dare-done" id="done" role="status"></p>
-    </section>
+    <p class="chips"><span class="tag strong">הכי חזק: ${NAMES[strong]}</span><span class="tag weak">כדאי לחזק: ${NAMES[weak]}</span></p>
+    <section class="dare" id="gift" aria-label="המתכון הסודי"></section>
     <button class="again" id="again">לשחק שוב</button>
     <footer class="sign"><img src="logo.png" alt="שוננA"></footer>`;
-  // phones that can share files send the postcard image with the text; others fall back to the WhatsApp text link
-  let cardFile = null;
-  drawCard(total).then(b => { if(b) cardFile = new File([b], 'sandwich-challenge.png', {type:'image/png'}); });
-  const shareBtn = document.getElementById('share');
-  // after a share: a second burst of confetti and the button invites another friend
-  const celebrate = () => {
-    confetti();
-    document.getElementById('done').textContent = 'יצא! 🎉 עכשיו נראה אם היא עוקפת אותך.';
-    shareBtn.textContent = 'לאתגר עוד חברה';
-    shareBtn.classList.add('sent');
+  // the analysis is free; the details are what she gives for the recipe, and only then does anything reach the sheet
+  const gift = document.getElementById('gift');
+  const showSave = () => {
+    gift.innerHTML = `
+      <h2 class="dare-title">כמעט<span class="red">!</span> המתכון בדרך אלייך</h2>
+      <p class="dare-sub">שמרי אותי באנשי הקשר בתור שוננA - שושנה קופרמן, ושלחי לי הודעה.</p>
+      <a class="btn" id="save" href="https://wa.me/${BUSINESS_PHONE}?text=${encodeURIComponent(SAVE_TEXT)}" target="_blank" rel="noopener">💬 שמרי אותי וקבלי את המתכון</a>
+      <p class="dare-done" id="done" role="status"></p>`;
+    document.getElementById('save').addEventListener('click', () => {
+      track('save', {});
+      setTimeout(() => { confetti(); document.getElementById('done').textContent = 'מעולה! 💛 עכשיו רק לשמור אותי ולשלוח.'; }, 600);
+    });
   };
-  shareBtn.addEventListener('click', e => {
-    track('share', {});
-    if(cardFile && navigator.canShare && navigator.canShare({files:[cardFile]})){
+  const showForm = () => {
+    gift.innerHTML = `
+      <h2 class="dare-title">🎁 מתנה! המתכון הסודי לסנדוויץ' השיווקי שלך</h2>
+      <p class="dare-sub">השאירי פרטים, שמרי אותי, והוא אצלך בוואטסאפ.</p>
+      <form id="f" novalidate>
+        <label class="field">שם פרטי<input id="name" autocomplete="given-name" required placeholder=" " value="${esc(S.name)}"></label>
+        <label class="field">טלפון נייד<input id="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder=" " value="${esc(S.phone)}"></label>
+        <label class="consent"><input id="consent" type="checkbox" ${S.consent?'checked':''}>מאשרת לקבל משוננA תוכן, טיפים והצעות בוואטסאפ. אפשר להסיר בכל רגע.</label>
+        <p class="err" id="err" role="alert"></p>
+        <button class="btn" type="submit">💬 שמרי אותי וקבלי את המתכון</button>
+      </form>
+      <p class="dare-note">הפרטים נשמרים אצל שוננA בלבד.</p>`;
+    document.getElementById('f').addEventListener('submit', async e => {
       e.preventDefault();
-      navigator.share({files:[cardFile], text:shareText(total)}).then(celebrate).catch(() => {});
-    } else setTimeout(celebrate, 600);
-  });
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.replace(/[\s-]/g,'');
+      const err = document.getElementById('err');
+      if(!name){ err.textContent = 'איך לקרוא לך? כתבי שם פרטי.'; return; }
+      if(!/^0?5\d{8}$/.test(phone)){ err.textContent = 'מספר הטלפון צריך להיות נייד ישראלי, למשל 050-1234567.'; return; }
+      const btn = document.querySelector('#f .btn'); btn.disabled = true; btn.textContent = 'רגע...';
+      Object.assign(S, {name, phone, consent:document.getElementById('consent').checked, signed:true});
+      store('sandwich-player', {name, phone});
+      // signup must land before finish, or finish would be overwritten by signup's defaults
+      await track('signup', {name, phone, consent:S.consent, src:SOURCE.src, ref:SOURCE.ref});
+      sendFinish(); track('save', {});
+      // straight into a chat with Shoshana, where WhatsApp offers to add her to contacts
+      location.href = `https://wa.me/${BUSINESS_PHONE}?text=${encodeURIComponent(SAVE_TEXT)}`;
+      showSave();
+    });
+  };
+  S.signed ? showSave() : showForm();
   confetti();
   document.getElementById('again').addEventListener('click', () => { Object.assign(S,{screen:'play',i:0,answers:[],finished:false}); render(); });
   window.scrollTo({top:0});
@@ -398,7 +353,7 @@ function render(){ ({entry:renderEntry, play:renderPlay, result:renderResult})[S
 function trackVisit(){
   let vid;
   try{ vid = localStorage.getItem('sandwich-visitor'); if(!vid){ vid = newId(); localStorage.setItem('sandwich-visitor', vid); } }catch(e){ vid = newId(); }
-  track('visit', {id:vid, src:PARAMS.get('src') || (PARAMS.get('ref') ? 'חברה' : 'ישיר'), ref:PARAMS.get('ref') || ''});
+  track('visit', {id:vid, src:SOURCE.src, ref:SOURCE.ref});
 }
 
 async function start(saved){
