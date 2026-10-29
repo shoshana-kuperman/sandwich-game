@@ -60,7 +60,7 @@ button{cursor:pointer}
 .lede{text-align:center;font-size:18px}
 .lede b{font-weight:700}
 form{display:flex;flex-direction:column;gap:14px}
-label.field{display:flex;flex-direction:column;gap:4px;font-weight:500;font-size:15px}
+label.field{display:flex;flex-direction:column;gap:4px;font-weight:300;font-size:15px}
 .field input{border:2px solid var(--ink);background:var(--white);border-radius:4px;padding:12px 14px;font-size:18px;color:var(--ink)}
 .field input:invalid:not(:placeholder-shown){border-color:var(--red)}
 .consent{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--mute)}
@@ -126,18 +126,16 @@ form.row{display:flex;flex-direction:row;gap:8px}
 .gift{text-align:center;font-size:16px;font-weight:500;padding:8px 12px;border-block:2px solid var(--red);text-wrap:balance}
 .gift b{font-weight:800}
 /* share block: the one call to action on the result screen, set as a black "negative" panel so it reads as the celebration moment */
-.dare{display:flex;flex-direction:column;gap:16px;background:var(--ink);color:var(--white);padding:24px 18px 26px;margin-inline:-16px;position:relative;overflow:hidden}
-.dare-title{font-size:26px;font-weight:900;text-align:center;line-height:1.1}
+.dare{display:flex;flex-direction:column;gap:14px;margin-top:4px}
+.dare-title{font-size:30px;font-weight:900;text-align:center;line-height:1.1}
 .dare-sub{text-align:center;margin-top:-6px;font-size:17px;font-weight:300}
+.dare-sub b{font-weight:700}
 .dare .btn{font-size:21px;padding:18px 20px;animation:nudge 2.4s ease-in-out 1.2s infinite}
 .dare .btn.sent{animation:none}
 @keyframes nudge{0%,80%,100%{transform:scale(1)}88%{transform:scale(1.04)}94%{transform:scale(.99)}}
 .chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:-6px}
 .chips .tag{font-size:14px;padding:4px 12px}
-.dare .field{color:var(--white)}
-.dare .consent{color:#c9c9cf}
-.dare .err{color:#ff8a94}
-.dare-note{text-align:center;font-size:13px;color:#c9c9cf;margin-top:-6px}
+.dare-note{text-align:center;font-size:13px;color:var(--mute);margin-top:-6px}
 .dare-done{text-align:center;font-weight:800;font-size:19px;min-height:0}
 .dare-done:empty{display:none}
 /* confetti in brand colors, fired on the result and again after a share */
@@ -154,7 +152,7 @@ form.row{display:flex;flex-direction:row;gap:8px}
 <script>
 const BRUSH = "M785.41,339.04c-.89-3.74-.58-8-.48-12.01.23-8.81-2.46-16.71-5.08-24.51-2.24-6.69-5.98-8.1-12.17-5.94-5.89-1.31-6.28-1.66-6.38-6.53-.05-2.25.31-4.54.13-6.76-.58-6.92,2.19-13.28,2.12-20.04-.14-14.86-.11-29.76-2.44-44.44-1.14-7.18-4.14-12.1-10.05-14.48-10-4.04-10.96-5.87-11.53-19.03-.18-4.05.09-8.12.02-12.18-.06-3.61.17-7.35-.54-10.78-2.33-11.31-6.39-14.9-13.46-14.08-2.53.29-5.1-.06-7.65-.07-70.04,0-139.97.69-210,3.37-26.6,1.02-53.2,2.22-79.79,3.6-22.57,1.17-46.7-1.54-68.77,3.41-1.77.4-3.62.27-5.43.27-8.37,0-16.75.12-25.12-.07-10.93-.24-21.65,2.81-32.64,2.32-12.36-.55-24.77.1-37.15.46-3.56.1-7.35-.73-10.58,2.17,1.81.12,3.29.79,4.51,1.92-1.22-1.13-2.7-1.8-4.51-1.92-3.62.26-7.26.28-10.84.85-2.15.34-4.16.97-6.42.51-10.12-2.07-20.27-1.28-30.4.14-8.99,1.27-17.95,2.99-26.96,3.89-10.13,1.02-20.36.02-30.4,2.85-2.08.59-4.36.4-6.52.19-7.23-.68-14.54.34-21.71-1.97-4.41-1.42-8.37,4.03-7.55,9.88,1.36,9.75,2.07,19.59,4.66,29.08,1.97,7.23,3.49,14.73,2.96,22.55-11.96,1.1-23.93,2.18-35.89,3.33-1.07.1-2.14.5-3.17.92-3.05,1.26-4.94,3.76-5.04,7.88-.17,7.65-.59,15.41,2.94,22.27,1.42,2.75,1.78,5.84,2.54,8.84,1.85,7.3,4.02,14.47,5.99,21.73.78,2.87,2.36,4.49,4.66,5.01,1.42.32,2.9.3,4.35.4,15.3.99,13.16,5.24,16.05,16.81,1.6,6.4.65,7.86-5.33,7.54-8.41-.45-16.66.09-24.86,2.64-5.23,1.63-6.13,2.48-6.28,8.65-.14,5.85,3.93,28.4,6.83,37.83.78,7.16,4.89,7.97,9.62,7.98,37.71,0,73.93.44,111.57-3.14,82.9-7.87,165.89-14.96,249.02-17.79,80.59-2.74,160.6,1.95,241.06,5.35,7.98.34,16.02,1.21,23.87,2.97,7.24,1.62,14.43,2.13,21.71,1.98,1.33,1.61,2.99,2.15,4.78,2.18,4.97.08,9.94.14,14.9.21,1.46.15,2.92.3,4.38.45,2.56,2.47,5.29,4.7,7.63,7.46,4.53,5.35,12.21,3.75,15.86-3.51,1.55-3.08,2.5-6.41,2.7-10.09.55-10.18,2.72-20.25.26-30.57Z";
 const BUSINESS_PHONE = '972546494732';
-const SAVE_TEXT = "היי שושנה! 🥪 סיימתי את משחק הסנדוויצ'ים ושמרתי אותך 💛 אשמח למתכון הסודי!";
+const CONTACT_CARD = 'https://shonana.co.il/save.vcf';
 const SHEET_URL = 'https://script.google.com/macros/s/AKfycbzZmspM0bM1NcnLO7O_gJ_AKLFx2cz98wRpt0p2Zk5SQ1xpSzpGvhm8L7OZPHmt4953/exec';
 const GAME_URL = location.origin + location.pathname;
 const PARAMS = new URLSearchParams(location.search);
@@ -284,35 +282,23 @@ function renderResult(){
     <header class="res-head">
       <img class="game-logo small" src="game-logo.png" alt="אמא מוכרת סנדוויצ'ים">
       <h1 class="score">${S.signed ? esc(S.name) + ', ' : ''}ענית נכון על <b>${total}</b> מתוך ${N} כריכים</h1>
-      <p class="res-line">${P.line}</p>
     </header>
-    <p class="chips"><span class="tag strong">הכי חזק: ${NAMES[strong]}</span><span class="tag weak">כדאי לחזק: ${NAMES[weak]}</span></p>
-    <section class="dare" id="gift" aria-label="המתכון הסודי"></section>
+    <p class="chips"><span class="tag strong">הכי חזק: ${NAMES[strong]}</span><span class="tag weak">הכי חלש: ${NAMES[weak]}</span></p>
+    <section class="dare" id="gift" aria-label="המתנה"></section>
     <button class="again" id="again">לשחק שוב</button>
     <footer class="sign"><img src="logo.png" alt="שוננA"></footer>`;
   // the analysis is free; the details are what she gives for the recipe, and only then does anything reach the sheet
   const gift = document.getElementById('gift');
-  const showSave = () => {
-    gift.innerHTML = `
-      <h2 class="dare-title">כמעט<span class="red">!</span> המתכון בדרך אלייך</h2>
-      <p class="dare-sub">שמרי אותי באנשי הקשר בתור שוננA - שושנה קופרמן, ושלחי לי הודעה.</p>
-      <a class="btn" id="save" href="https://wa.me/${BUSINESS_PHONE}?text=${encodeURIComponent(SAVE_TEXT)}" target="_blank" rel="noopener">💬 שמרי אותי וקבלי את המתכון</a>
-      <p class="dare-done" id="done" role="status"></p>`;
-    document.getElementById('save').addEventListener('click', () => {
-      track('save', {});
-      setTimeout(() => { confetti(); document.getElementById('done').textContent = 'מעולה! 💛 עכשיו רק לשמור אותי ולשלוח.'; }, 600);
-    });
-  };
   const showForm = () => {
     gift.innerHTML = `
-      <h2 class="dare-title">🎁 מתנה! המתכון הסודי לסנדוויץ' השיווקי שלך</h2>
-      <p class="dare-sub">השאירי פרטים, שמרי אותי, והוא אצלך בוואטסאפ.</p>
+      <h2 class="dare-title">ויש לך מתנה<span class="red">!</span> 🎁</h2>
+      <p class="dare-sub"><b>בואי נכין</b> את הסנדוויץ' השיווקי שלך שיהיה מותאם, מבטיח ומושך לקוחות.</p>
       <form id="f" novalidate>
         <label class="field">שם פרטי<input id="name" autocomplete="given-name" required placeholder=" " value="${esc(S.name)}"></label>
         <label class="field">טלפון נייד<input id="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder=" " value="${esc(S.phone)}"></label>
         <label class="consent"><input id="consent" type="checkbox" ${S.consent?'checked':''}>מאשרת לקבל משוננA תוכן, טיפים והצעות בוואטסאפ. אפשר להסיר בכל רגע.</label>
         <p class="err" id="err" role="alert"></p>
-        <button class="btn" type="submit">💬 שמרי אותי וקבלי את המתכון</button>
+        <button class="btn" type="submit">📲 שמרי אותי וקבלי את המתכון</button>
       </form>
       <p class="dare-note">הפרטים נשמרים אצל שוננA בלבד.</p>`;
     document.getElementById('f').addEventListener('submit', e => {
@@ -329,12 +315,12 @@ function renderResult(){
       // keepalive lets it finish even as the page hands over to WhatsApp
       S.finished = true;
       track('signup', {name, phone, consent:S.consent, src:SOURCE.src, ref:SOURCE.ref, total, of:N, t, profile:P.title});
-      // straight into a chat with Shoshana, where WhatsApp offers to add her to contacts
-      location.href = `https://wa.me/${BUSINESS_PHONE}?text=${encodeURIComponent(SAVE_TEXT)}`;
-      showSave();
+      // straight to her contact card, so she saves Shoshana in one tap
+      location.href = CONTACT_CARD; track('save', {});
+      btn.textContent = '✓ נשלח';
     });
   };
-  S.signed ? showSave() : showForm();
+  S.signed ? gift.remove() : showForm();
   confetti();
   document.getElementById('again').addEventListener('click', () => { Object.assign(S,{screen:'play',i:0,answers:[],finished:false}); render(); });
   window.scrollTo({top:0});
