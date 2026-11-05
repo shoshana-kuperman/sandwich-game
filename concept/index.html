@@ -176,6 +176,12 @@ h2{font-size:clamp(30px,4.2vw,52px)}
 .points li:nth-child(1){animation-delay:.3s}.points li:nth-child(2){animation-delay:.45s}
 .points li:nth-child(3){animation-delay:.6s}.points li:nth-child(4){animation-delay:.75s}
 .points li:nth-child(5){animation-delay:.9s}.points li:nth-child(6){animation-delay:1.05s}
+/* המשפט הדרמטי שסוגר את הפתיחה */
+.hero-twist{
+  margin:clamp(36px,5vw,56px) 0 0;font-weight:800;line-height:1.2;
+  font-size:clamp(34px,5vw,64px);color:var(--brand-white);
+  opacity:0;animation:pop .7s 1.4s ease forwards;
+}
 @keyframes pop{from{opacity:0;transform:translateX(-12px)}to{opacity:1;transform:none}}
 
 @media (max-width:860px){
@@ -184,11 +190,14 @@ h2{font-size:clamp(30px,4.2vw,52px)}
 @media (prefers-reduced-motion:reduce){
   .hero-line{stroke-dashoffset:0}
   .hero-dots .d{scale:1}
+  .points li,.hero-twist{opacity:1}
 }
 
 /* ---------- פסקת המעבר ---------- */
-.intro{background:var(--brand-white)}
+.intro{background:var(--brand-white);padding-top:clamp(40px,5vw,64px)}
 .intro .lead{font-size:clamp(24px,2.4vw,32px);font-weight:700;margin-bottom:.8em}
+.intro .subhead{font-size:clamp(30px,4vw,48px);font-weight:800;margin:.6em 0 .8em;line-height:1.25}
+.point .generic{font-size:clamp(20px,2vw,26px);font-weight:700;margin:0 0 1.2em}
 .intro .connect{font-size:clamp(28px,3.6vw,46px);margin:1.1em 0 1.2em;line-height:1.35}
 
 /* ---------- למי זה מתאים ---------- */
@@ -437,16 +446,18 @@ h2{font-size:clamp(30px,4.2vw,52px)}
         <li>יש בך תשוקה להשפיע על עוד אנשים</li>
         <li>וגם מהלכי שיווק שכבר עבדו בעבר</li>
       </ul>
+      <p class="hero-twist">ועדיין את נשמעת כמו <span class="brush brush--red">עוד אחת</span>?</p>
     </div>
   </div>
 </section>
 
 <section class="intro">
   <div class="wrap wrap--narrow">
-    <p class="lead reveal">כל הנקודות האלה הן נתונים מעולים לעסק.</p>
-    <p class="reveal">אבל אם אין חיבור ביניהן, ואין קונספט שאוסף את כל הטוב לתהליך שיווקי אחד שיש בו מסר מותאם, ברור, מונגש ומפתיע – <strong>הקהל פוגש רק חלקים ממך</strong>, ולא מצליח לראות את התמונה השלמה שתגרום לו לבחור להצטרף אלייך.</p>
-    <p class="reveal">אז רגע לפני שאת מחפשת מה עוד את צריכה ללמוד או לשנות בעצמך, ולפני שאת יוצאת לעוד מהלך שיווקי שמצליח לבטא רק חלק ממה שיש לך להציע,</p>
-    <h2 class="connect reveal">בואי <span class="brush">נחבר את הנקודות</span> שלך לרעיון אחד ברור, מסקרן ומעורר רצון להתקדם איתך<span class="dot">!</span></h2>
+    <p class="reveal">את משקיעה, יוצרת ועושה הכול נכון, ובכל זאת לא מבינים מי את ומה יש לך לתת. יש בלאגן בשיווק, כל פוסט מספר סיפור אחר, <strong>והקהל פוגש רק חלקים ממך</strong>.</p>
+    <p class="reveal">כי כשאין קונספט שמחבר את כל הנקודות לאמירה אחת ברורה, גם עסק מצוין נראה גנרי.</p>
+    <h3 class="subhead reveal">וההפך מגנרי הוא <span class="brush brush--red">קונספט</span><span class="dot">.</span></h3>
+    <p class="reveal">אז רגע לפני שאת מחפשת מה עוד ללמוד או לשנות בעצמך, ולפני שאת יוצאת לעוד מהלך שיווקי שמבטא רק חלק ממה שיש לך להציע,</p>
+    <h2 class="connect reveal">בואי <span class="brush">נחבר את הנקודות</span> שלך לאמירה אחת ברורה, מסקרנת ומבדלת, שתגרום לקהל לראות אותך ולבחור בך<span class="dot">!</span></h2>
     <a class="btn js-cta reveal" href="#price">אני רוצה לפצח את הקונספט שלי <span class="arrow">←</span></a>
   </div>
 </section>
@@ -465,10 +476,11 @@ h2{font-size:clamp(30px,4.2vw,52px)}
       <li class="reveal">את רוצה ליצור קמפיין שמושך את הקהל, ולא רק מודעה שמספרת לו מה את מוכרת.</li>
       <li class="reveal">את רוצה ליצור מהלך שגורם לאנשים <span class="mark">לעצור!</span> מהלך שיש בו רעיון, משהו מפתיע ומעורר מחשבה!</li>
       <li class="reveal">את רוצה לשווק בדרך שמרגישה לך טבעית, בלי להרגיש עוד "העתק" של כל התוכן בתחום.</li>
+      <li class="reveal">יש לך <span class="mark">בלאגן בשיווק</span>, והגיע הזמן לעשות בו סדר.</li>
     </ol>
     <div class="fit-key reveal">
       <span class="fit-key-label">והכי חשוב —</span>
-      <p>אם את רוצה שהשיווק יפסיק להיות מטלה שצריך לסמן עליה וי, ויהפוך לדרך <strong>ליצור חיבור, לבנות אמון ולגרום לאנשים לבחור בך</strong> עוד לפני שהם קנו ממך.</p>
+      <p>אם את רוצה שהשיווק יפסיק להיות מטלה שצריך לסמן עליה וי, ויהפוך לדרך <strong>ליצור חיבור, לבנות אמון, להראות לאנשים את המיוחדות שלך ולגרום לאנשים לבחור בך</strong> עוד לפני שהם קנו ממך.</p>
     </div>
   </div>
 </section>
@@ -512,9 +524,9 @@ h2{font-size:clamp(30px,4.2vw,52px)}
       <p class="reveal">אני אוהבת להכיר אנשים ועסקים, לראות את ההתלהבות והחיבור למומחיות האישית של כל אחד ולתת דרכים יצירתיות כדי להתפתח לשלב הבא של יותר קהל, יותר השפעה ויותר רווחים.</p>
       <p class="reveal">בתהליכי עבודה חשוב לי למצוא את הנקודה שבה הערך של העסק פוגש את הצורך של הקהל, את הרעיון שיכול להפוך מסר מקצועי לחוויה מעניינת, ואת הדרך שבה אפשר ליצור תקשורת שמחברת אנשים ולא רק מעבירה מידע.</p>
       <p class="reveal">בורכתי בשנינות ומיליון רעיונות, והכי מדליק אותי כשזה הולך עם סדר ומטרה. לכן יחד עם החשיבה היצירתית שלי אני עובדת עם תבניות וכלים שעוזרים לי לקחת רעיון ולפתח אותו למהלך שיווקי שנון ומפתיע – בלי לאבד בדרך את המטרה שלשמה התכנסנו.</p>
-      <p class="reveal">במהלך העבודה שלי גיבשתי דרך חשיבה שמבוססת על ארבעה עקרונות:</p>
+      <p class="reveal">במהלך העבודה גיבשתי דרך חשיבה שמבוססת על ארבעה עקרונות:</p>
       <ul class="principles reveal">
-        <li>התאמה</li><li>הבטחה</li><li>נוכחות</li><li>משיכה</li>
+        <li>הבטחה</li><li>התאמה</li><li>נוכחות</li><li>משיכה</li>
       </ul>
       <p class="reveal">כי בעיניי, קמפיין טוב לא מתחיל בשאלה איזו מודעה נכתוב, אלא – <strong>איך נחבר בין כל החוזקות, הערכים והמטרות של העסק</strong> כדי ליצור מהלך שהקהל ירצה להשתתף בו.</p>
       <p class="about-punch reveal">את זה נוכל לעשות יחד גם לעסק שלך בפגישת הקונספט – פגישה שבה אנחנו מחברות את הנקודות שלך למהלך מכירה <span class="mark">משחקי, ברור ומותאם</span> לעסק שלך.</p>
@@ -539,6 +551,7 @@ h2{font-size:clamp(30px,4.2vw,52px)}
     <p class="pieces reveal" aria-label="עוד פוסט, עוד מבצע, עוד סרטון, עוד הסבר, עוד קמפיין">
       <span>עוד פוסט</span><span>עוד מבצע</span><span>עוד סרטון</span><span>עוד הסבר</span><span>עוד קמפיין</span>
     </p>
+    <p class="generic reveal">וככה עסק ייחודי נראה בחוץ כמו עוד אחד! כי <span class="mark">ההפך מקונספט הוא גנרי</span>.</p>
     <p class="reveal">אבל כשיש <strong>מסר אחיד שמתקדם כמו סיפור בהמשכים</strong>, הקהל פוגש רעיון ששווה לעקוב אחריו, ללמוד ממנו, לקבל השראה ולהרגיש שהוא רוצה להיות חלק ממנו.</p>
     <aside class="research reveal">
       <p class="research-title">וזה לא רק נשמע נכון<span class="dot">.</span></p>
@@ -619,6 +632,7 @@ h2{font-size:clamp(30px,4.2vw,52px)}
     <p class="reveal">ככה את יכולה לעבוד קשה, להשקיע לא מעט כסף, ועדיין להרגיש שאת לא מצליחה להביא לידי ביטוי את כל מה שיש לך לתת. הקהל רואה פוסט פה, מודעה שם, אבל לא מחבר ביניהם כדי להבין מה באמת מיוחד בך.</p>
     <p class="reveal">והפספוס הוא לא רק בעוד כסף שהוצאת או בעוד שעות שהלכו על יצירת תוכן. כשאת שוב ושוב יוצאת עם משהו ולא מקבלת את התגובה שציפית לה, זה מתחיל לחלחל פנימה.</p>
     <ul class="doubts reveal">
+      <li>למה לא רואים אותי, כשאני עושה הכול נכון?</li>
       <li>אולי אני לא מספיק מקצועית?</li>
       <li>אולי המוצר שלי כבר לא רלוונטי?</li>
       <li>אולי אני לא יודעת לשווק?</li>
@@ -676,12 +690,16 @@ h2{font-size:clamp(30px,4.2vw,52px)}
     </div>
     <div class="faq-list">
       <details class="reveal">
-        <summary>״אני לא יכולה לחשוב על רעיון כזה בעצמי?״</summary>
-        <p>הגיוני ממש שאת יכולה! במיוחד אם יש לך ניסיון עם השיווק של העסק במשך השנים. אבל לפעמים כשאנחנו כל כך קרובות לעסק שלנו, קשה לנו לראות את החיבורים והאפשרויות שמסתתרים בו. בפגישה נביא זווית חדשה ונחבר את הנקודות למהלך אחד ברור.</p>
+        <summary>״אני יכולה לעשות את זה לבד, לא?״</summary>
+        <p>נכון, את יכולה לבד. במיוחד אם יש לך ניסיון עם השיווק של העסק במשך השנים. אבל לפעמים כשאנחנו כל כך קרובות לעסק שלנו, קשה לנו לראות את החיבורים והאפשרויות שמסתתרים בו. בפגישה נביא זווית חדשה ונחבר את הנקודות למהלך אחד ברור. אני לא לוקחת ממך את היצירה. אני נותנת לך את הבסיס שממנו היצירה יוצאת: הקונספט, האמירה ותעודת הזהות העסקית שלך.</p>
       </details>
       <details class="reveal">
         <summary>״כבר ניסיתי כל כך הרבה דברים בשיווק. למה שהפעם זה יעבוד?״</summary>
         <p>כי הפעם אנחנו לא מתחילות מעוד פוסט או מודעה, אלא עוצרות כדי לבנות רעיון מרכזי שיחבר בין המסר, המוצר והקהל שלך. זה לא מבטיח תוצאות מיידיות, אבל נותן לשיווק שלך כיוון ברור יותר.</p>
+      </details>
+      <details class="reveal">
+        <summary>״אני יכולה לבקש מ-ChatGPT קונספט?״</summary>
+        <p>AI יודע לבצע מהר ויפה. אבל הוא לא יכול לפצח קונספט, ולכן מה שהוא מייצר יוצא גנרי. בפגישה אני המוח האנושי שמוביל את הרעיון, ואחרי שיש קונספט, הביצוע יכול לעבור גם ל-AI.</p>
       </details>
       <details class="reveal">
         <summary>״850 ₪ בשביל פגישה אחת?״</summary>
