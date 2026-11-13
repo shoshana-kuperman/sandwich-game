@@ -55,8 +55,6 @@ form{display:flex;flex-direction:column;gap:14px}
 label.field{display:flex;flex-direction:column;gap:4px;font-weight:300;font-size:15px}
 .field input{border:2px solid var(--ink);background:var(--white);border-radius:4px;padding:12px 14px;font-size:18px;color:var(--ink)}
 .field input:invalid:not(:placeholder-shown){border-color:var(--red)}
-.consent{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--mute)}
-.consent input{width:20px;height:20px;accent-color:var(--red);margin-top:2px;flex:none}
 .err{color:var(--red);font-size:14px;min-height:1.2em}
 
 .btn{border:0;border-radius:4px;padding:16px 20px;font-weight:800;font-size:19px;background:var(--red);color:var(--white);text-align:center;text-decoration:none;display:block;transition:transform .12s}
@@ -105,7 +103,7 @@ label.field{display:flex;flex-direction:column;gap:4px;font-weight:300;font-size
 @keyframes nudge{0%,80%,100%{transform:scale(1)}88%{transform:scale(1.04)}94%{transform:scale(.99)}}
 .chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:-6px}
 .chips .tag{font-size:14px;padding:4px 12px}
-.dare-note{text-align:center;font-size:13px;color:var(--mute);margin-top:-6px}
+.dare-note{text-align:center;font-size:14px;color:var(--ink);margin-top:-6px;text-wrap:balance}
 /* confetti in brand colors, fired on the result */
 .confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:20}
 .confetti i{position:absolute;top:-16px;width:9px;height:14px;border-radius:2px;animation:fall var(--d,2.6s) cubic-bezier(.2,.6,.4,1) forwards}
@@ -263,11 +261,10 @@ function renderResult(){
       <form id="f" novalidate>
         <label class="field">שם פרטי<input id="name" autocomplete="given-name" required placeholder=" " value="${esc(S.name)}"></label>
         <label class="field">טלפון נייד<input id="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder=" " value="${esc(S.phone)}"></label>
-        <label class="consent"><input id="consent" type="checkbox" ${S.consent?'checked':''}>מאשרת לקבל משוננA תוכן, טיפים והצעות בוואטסאפ. אפשר להסיר בכל רגע.</label>
         <p class="err" id="err" role="alert"></p>
         <button class="btn" type="submit">💬 שמרי אותי וקבלי את המתכון</button>
       </form>
-      <p class="dare-note">הפרטים נשמרים אצל שוננA בלבד.</p>`;
+      <p class="dare-note">בלחיצה את מאשרת לקבל משוננA תכנים, טיפים והצעות בוואטסאפ. אפשר להסיר בכל רגע.</p>`;
     document.getElementById('f').addEventListener('submit', e => {
       e.preventDefault();
       const name = document.getElementById('name').value.trim();
@@ -276,7 +273,7 @@ function renderResult(){
       if(!name){ err.textContent = 'איך לקרוא לך? כתבי שם פרטי.'; return; }
       if(!/^0?5\d{8}$/.test(phone)){ err.textContent = 'מספר הטלפון צריך להיות נייד ישראלי, למשל 050-1234567.'; return; }
       const btn = document.querySelector('#f .btn'); btn.disabled = true; btn.textContent = 'רגע...';
-      Object.assign(S, {name, phone, consent:document.getElementById('consent').checked, signed:true});
+      Object.assign(S, {name, phone, consent:true, signed:true});
       store('sandwich-player', {name, phone});
       // one request carries the signup and the result (the sheet can be slow to answer, so nothing waits on it);
       // keepalive lets it finish even as the page hands over to WhatsApp
