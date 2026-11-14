@@ -5,7 +5,7 @@
 <base href="/game/">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta property="og:title" content="למה הסנדוויץ' חזר הביתה?">
-<meta property="og:description" content="12 כריכים. 10 שניות לכל אחד. גלי מה חסר בשיווק שלך.">
+<meta property="og:description" content="4 כריכים. 15 שניות לכל אחד. גלי מה חסר בשיווק שלך.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://shonana.co.il/game/">
 <meta property="og:image" content="https://shonana.co.il/game/og.jpg">
@@ -135,15 +135,15 @@ const SOURCE = (() => {
 const brush = () => `<svg viewBox="25 150 770 300" preserveAspectRatio="none" aria-hidden="true"><path d="${BRUSH}"/></svg>`;
 
 const NAMES = {relevance:'התאמה', promise:'הבטחה', presence:'נוכחות', attraction:'משיכה'};
-const ORDER = ['relevance','promise','presence','attraction'];
+const ORDER = ['promise','relevance','presence','attraction'];
 const PROFILES = {
   presence:  {title:'הכריך הנעלם', line:'יש לך מה להציע, אבל הקהל לא פוגש אותך ברגע שהוא צריך לבחור.', tip:'כתבי 3 רגעים שבהם הלקוחה שלך צריכה אותך. עכשיו בדקי: איפה היא נמצאת באותם רגעים? שם הכריך שלך צריך להיות.'},
   attraction:{title:'הכריך של כולם', line:'השירות שלך טוב, אבל הוא נראה כמו כל השאר ולא מעורר חשק.', tip:'קחי את הפוסט האחרון שלך ושאלי: למה שמישהי תעצור עליו באמצע הגלילה? אם אין תשובה, זה המקום להתחיל.'},
   promise:   {title:'כריך הפלא', line:'יש בו הכול, ובגלל זה לא ברור מה בדיוק מקבלים.', tip:'נסחי במשפט אחד מה הלקוחה מקבלת ממך. בלי "וגם". אם לא מצליח במשפט אחד, ההבטחה עוד לא חדה.'},
   relevance: {title:'הכריך של מישהו אחר', line:'ההצעה טובה, אבל היא לא מדברת אל האדם הנכון ואל מה שהוא צריך עכשיו.', tip:'כתבי משפט אחד: למי בדיוק השירות שלך, ובאיזה רגע בחיים שלה היא צריכה אותו. כל השאר נבנה מזה.'}
 };
-const CHEERS = {4:'שליש מהתיק כבר מאחורייך. ממשיכות.', 8:'עוד ארבעה כריכים, ויש לך תמונה מלאה.'};
-const SECONDS = 10;
+const CHEERS = {};
+const SECONDS = 15;
 
 let slides = [];
 let S = {screen:'entry', name:'', phone:'', consent:false, i:0, answers:[]};
@@ -156,7 +156,7 @@ function renderEntry(){
   app.innerHTML = `
     <img class="game-logo" src="game-logo.png" alt="אמא מוכרת סנדוויצ'ים">
     <h1 class="hero">למה הסנדוויץ'<br>חזר הביתה<span class="red">?</span></h1>
-    <p class="lede"><b>12 כריכים. 10 שניות לכל אחד.</b><br>תגלי מה יגרום ללקוחות לבחור בך!</p>
+    <p class="lede"><b>4 כריכים. 15 שניות לכל אחד.</b><br>תגלי מה יגרום ללקוחות לבחור בך!</p>
     <p class="gift">🎁 <b>מתנה! המתכון לסנדוויץ' השיווקי שלך</b></p>
     <button class="btn" id="go">יאלה, משחקים</button>
     <footer class="sign"><img src="logo.png" alt="שוננA"></footer>`;
@@ -234,12 +234,13 @@ function answer(k){
 function tally(){
   const t = Object.fromEntries(ORDER.map(k=>[k,0]));
   S.answers.forEach(a => { if(a.ok) t[a.ing]++; });
-  const weak = ORDER.reduce((m,k)=> t[k] < t[m] ? k : m, ORDER[0]);
-  const strong = ORDER.reduce((m,k)=> t[k] > t[m] ? k : m, ORDER[0]);
+  // one sandwich per ingredient: strongest is the first she got right, weakest the first she missed (either may be missing)
+  const weak = ORDER.find(k => !t[k]) || null;
+  const strong = ORDER.find(k => t[k]) || null;
   return {t, weak, strong, total: S.answers.filter(a=>a.ok).length};
 }
 function renderResult(){
-  const {t, weak, strong, total} = tally(), P = PROFILES[weak];
+  const {t, weak, strong, total} = tally(), P = PROFILES[weak] || {title:'הכריך המושלם'};
   const N = slides.length, per = k => slides.filter(s => s.ingredient === k).length;
   const sendFinish = () => { if(!S.finished){ S.finished = true; track('finish', {total, of:N, t, profile:P.title}); } };
   if(S.signed) sendFinish();
@@ -248,7 +249,7 @@ function renderResult(){
       <img class="game-logo small" src="game-logo.png" alt="אמא מוכרת סנדוויצ'ים">
       <h1 class="score">${S.signed ? esc(S.name) + ', ' : ''}ענית נכון על <b>${total}</b> מתוך ${N} כריכים</h1>
     </header>
-    <p class="chips"><span class="tag strong">הכי חזק: ${NAMES[strong]}</span><span class="tag weak">הכי חלש: ${NAMES[weak]}</span></p>
+    <p class="chips">${strong ? `<span class="tag strong">הכי חזק: ${NAMES[strong]}</span>` : ''}${weak ? `<span class="tag weak">הכי חלש: ${NAMES[weak]}</span>` : ''}</p>
     <section class="dare" id="gift" aria-label="המתנה"></section>
     <button class="again" id="again">לשחק שוב</button>
     <footer class="sign"><img src="logo.png" alt="שוננA"></footer>`;
